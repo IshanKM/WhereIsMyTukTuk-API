@@ -1,0 +1,37 @@
+{
+  "name": "whereismytuktuk-api",
+  "version": "1.0.0",
+  "description": "Student Id : COBSCCOMPY4231P-021 Coventry ID : 14381780",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IshanKM/WhereIsMyTukTuk-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/IshanKM/WhereIsMyTukTuk-API/issues"
+  },
+  "homepage": "https://github.com/IshanKM/WhereIsMyTukTuk-API#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.4.0",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "eslint": "^10.1.0",
+    "nodemon": "^3.1.14"
+  }
+}
