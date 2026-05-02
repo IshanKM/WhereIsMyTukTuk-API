@@ -1,22 +1,56 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const tukTukSchema = new mongoose.Schema({
-  registrationNumber: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  driverName: String,
-  phone: String,
-  district: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'District'
-  },
-  status: {
-    type: String,
-    enum: ['active', 'blocked'],
-    default: 'active'
-  }
-}, { timestamps: true });
+const tukTukSchema = new mongoose.Schema(
+  {
+    registrationNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
 
-export default mongoose.model('TukTuk', tukTukSchema);
+    chassisNumber: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+    
+    district: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "District",
+    },
+
+    model: {
+      type: String,
+    },
+
+    color: {
+      type: String,
+    },
+
+    type: {
+      type: String,
+      enum: ["2-stroke", "4-stroke", "electric"],
+    },
+
+    driver: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Driver",
+      required: true,
+    },
+
+    status: {
+      type: String,
+      enum: ["active", "inactive", "blocked"],
+      default: "active",
+    },
+
+    lastKnownLocation: {
+      latitude: Number,
+      longitude: Number,
+      timestamp: Date,
+    },
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model("TukTuk", tukTukSchema);
