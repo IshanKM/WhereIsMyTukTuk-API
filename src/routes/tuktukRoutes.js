@@ -1,12 +1,14 @@
 import express from "express";
 import TukTuk from "../models/TukTuk.js";
 import Driver from "../models/Driver.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
+import roleMiddleware from "../middlewares/roleMiddleware.js";
 
 const router = express.Router();
 
 
 // CREATE TukTuk
-router.post("/", async (req, res) => {
+router.post("/",authMiddleware,roleMiddleware("admin", "operator"), async (req, res) => {
   try {
     const { registrationNumber, driver } = req.body;
 
@@ -27,14 +29,14 @@ router.post("/", async (req, res) => {
 
 
 // GET all TukTuks
-router.get("/", async (req, res) => {
+router.get("/",authMiddleware,roleMiddleware("admin", "operator"), async (req, res) => {
   const tuktuks = await TukTuk.find().populate("driver");
   res.json(tuktuks);
 });
 
 
 // GET single TukTuk
-router.get("/:id", async (req, res) => {
+router.get("/:id",authMiddleware,roleMiddleware("admin", "operator"), async (req, res) => {
   const tuk = await TukTuk.findById(req.params.id).populate("driver");
 
   if (!tuk) {
@@ -46,7 +48,7 @@ router.get("/:id", async (req, res) => {
 
 
 // UPDATE TukTuk
-router.put("/:id", async (req, res) => {
+router.put("/:id",authMiddleware,roleMiddleware("admin", "operator"), async (req, res) => {
   try {
     const tuk = await TukTuk.findByIdAndUpdate(
       req.params.id,
@@ -62,7 +64,7 @@ router.put("/:id", async (req, res) => {
 
 
 // DELETE TukTuk
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",authMiddleware,roleMiddleware("admin", "operator"), async (req, res) => {
   await TukTuk.findByIdAndDelete(req.params.id);
   res.json({ message: "TukTuk deleted" });
 });
