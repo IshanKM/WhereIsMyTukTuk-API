@@ -14,6 +14,9 @@ import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import xss from "xss-clean";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger.js";
+
 
 const API_VERSION = "/api/v1";
 
@@ -29,12 +32,13 @@ app.use(express.json({ limit: "10kb" }));
 
 
 app.use(`${API_VERSION}/drivers`, driverRoutes);
-app.use(`/${API_VERSION}/tuktuks`, tuktukRoutes);
-app.use(`/${API_VERSION}/locations`, locationRoutes);
-app.use(`/${API_VERSION}/provinces`, provinceRoutes);
-app.use(`/${API_VERSION}/districts`, districtRoutes);
-app.use(`/${API_VERSION}/policestations`, policeStationRoutes);
-app.use(`/${API_VERSION}/auth1`, authRoutes);
+app.use(`${API_VERSION}/tuktuks`, tuktukRoutes);
+app.use(`${API_VERSION}/locations`, locationRoutes);
+app.use(`${API_VERSION}/provinces`, provinceRoutes);
+app.use(`${API_VERSION}/districts`, districtRoutes);
+app.use(`${API_VERSION}/policestations`, policeStationRoutes);
+app.use(`${API_VERSION}/auth`, authRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 const limiter = rateLimit({
@@ -44,8 +48,8 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
-app.use(mongoSanitize());
-app.use(xss());
+//app.use(mongoSanitize());
+//app.use(xss());
 
 
 export default app;
