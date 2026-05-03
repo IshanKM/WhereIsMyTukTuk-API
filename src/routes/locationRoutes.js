@@ -41,7 +41,7 @@ const router = express.Router();
 router.post(
   "/",
   authMiddleware,
-  roleMiddleware(ROLES.ADMIN, ROLES.POLICE),
+  roleMiddleware(ROLES.ADMIN, ROLES.POLICE,ROLES.OPERATOR),
   async (req, res) => {
     try {
       const { tuktuk, latitude, longitude, speed } = req.body;
