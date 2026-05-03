@@ -8,7 +8,8 @@ import connectDB from './config/db.js';
 import "./jobs/cleanupJob.js";
 
 
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 
 connectDB();
 

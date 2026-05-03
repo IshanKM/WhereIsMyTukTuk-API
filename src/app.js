@@ -10,6 +10,8 @@ import provinceRoutes from "./routes/provinceRoutes.js";
 import districtRoutes from "./routes/districtRoutes.js";
 import policeStationRoutes from "./routes/policeStationRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import homeRoutes from "./routes/homeRoutes.js";
+
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import xss from "xss-clean";
@@ -30,7 +32,7 @@ app.use(morgan('dev'));
 
 app.use(express.json({ limit: "10kb" }));
 
-
+app.use("/", homeRoutes);
 app.use(`${API_VERSION}/drivers`, driverRoutes);
 app.use(`${API_VERSION}/tuktuks`, tuktukRoutes);
 app.use(`${API_VERSION}/locations`, locationRoutes);
@@ -50,6 +52,8 @@ const limiter = rateLimit({
 app.use(limiter);
 //app.use(mongoSanitize());
 //app.use(xss());
+
+
 
 
 export default app;
