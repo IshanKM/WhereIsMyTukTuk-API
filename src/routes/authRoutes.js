@@ -5,7 +5,36 @@ import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
-// REGISTER
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentication and user management
+ */
+
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             name: Police Colombo
+ *             email: police@test.com
+ *             password: 123456
+ *             role: police
+ *             policeStation: POLICE_STATION_ID
+ *     responses:
+ *       200:
+ *         description: User registered successfully
+ *       400:
+ *         description: Error during registration
+ */
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password, role, policeStation } = req.body;
@@ -26,7 +55,26 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// LOGIN
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Login user and get JWT token
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             email: police@test.com
+ *             password: 123456
+ *     responses:
+ *       200:
+ *         description: Login successful, returns JWT token
+ *       400:
+ *         description: Invalid credentials
+ */
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
