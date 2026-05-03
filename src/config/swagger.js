@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000/api/v1",
+        url: "https://api.whereismytuktuk.online/api/v1",
       },
     ],
     components: {
